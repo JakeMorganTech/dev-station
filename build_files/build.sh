@@ -17,6 +17,11 @@ dnf5 install -y code
 mkdir -p "$(readlink -f /opt)/brave.com"
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf5 install -y brave-browser
+# Ensure the launcher symlink exists — RPM post-install scripts may fail
+# to create it due to /opt being a symlink in ostree images.
+if [ ! -f /usr/bin/brave-browser-stable ]; then
+    ln -s /opt/brave.com/brave/brave-browser-stable /usr/bin/brave-browser-stable
+fi
 
 # ── Development tools ─────────────────────────────────────────────────────────
 # UE5 build system dependencies not present in the Bazzite base image.
