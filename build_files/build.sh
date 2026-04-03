@@ -2,23 +2,51 @@
 
 set -ouex pipefail
 
-### Install packages
+# ── VS Code ───────────────────────────────────────────────────────────────────
+# Repo is pre-placed at /etc/yum.repos.d/vscode.repo via COPY in Containerfile.
+# Import Microsoft's GPG key so the signed package is accepted.
+rpm --import https://packages.microsoft.com/keys/microsoft.asc
+dnf5 install -y code
 
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/43/x86_64/repoview/index.html&protocol=https&redirect=1
+# ── Development tools ─────────────────────────────────────────────────────────
+# UE5 build system dependencies not present in the Kinoite base image.
+# The engine ships its own clang toolchain but clang/lld on the host are also
+# useful for non-UE C++ work. SDL2 is required by the UE5 editor at runtime.
+dnf5 install -y \
+    cmake \
+    ninja-build \
+    python3 \
+    clang \
+    lld \
+    SDL2 \
+    vim \
+    fish \
+    fastfetch \
+    btop \
+    nvtop \
+    cava \
+    cmatrix \
+    kitty \
+    stow \
+    dotnet-runtime-8.0 \
+    dotnet-sdk-8.0
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
+# ── Starship ─────────────────────────────────────────────────────────────────
+dnf5 -y copr enable atim/starship
+dnf5 install -y starship
+dnf5 -y copr disable atim/starship
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+# Cascadia Code and Cascadia Mono Nerd Font variants
+dnf5 install -y \
+    cascadia-code-nf-fonts \
+    cascadia-mono-nf-fonts
 
-#### Example for enabling a System Unit File
-
-systemctl enable podman.socket
+# ── Gaming ────────────────────────────────────────────────────────────────────
+# steam: native install via RPM Fusion (already enabled on ublue base images)
+# gamemode: CPU/GPU governor switching triggered by games
+# mangohud: in-game performance overlay
+dnf5 install -y \
+    steam \
+    gamemode \
+    mangohud
