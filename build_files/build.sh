@@ -8,6 +8,12 @@ set -ouex pipefail
 rpm --import https://packages.microsoft.com/keys/microsoft.asc
 dnf5 install -y code
 
+# ── Brave Browser ─────────────────────────────────────────────────────────────
+# Repo is pre-placed at /etc/yum.repos.d/brave-browser.repo via COPY in Containerfile.
+# Native install required — flatpak/snap variants lack hardware security key support.
+rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+dnf5 install -y brave-browser
+
 # ── Development tools ─────────────────────────────────────────────────────────
 # UE5 build system dependencies not present in the Bazzite base image.
 # The engine ships its own clang toolchain but clang/lld on the host are also

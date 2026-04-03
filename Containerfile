@@ -3,9 +3,9 @@ FROM scratch AS ctx
 COPY build_files /
 
 # Base image: Bazzite desktop variant with NVIDIA open kernel module
-# bazzite-nvidia ships Steam, gamemode, mangohud, and proper NVIDIA driver setup out of the box.
+# bazzite-nvidia-open ships Steam, gamemode, mangohud, and proper NVIDIA driver setup out of the box.
 # Requires Turing (RTX 20xx) or newer GPU — confirmed RTX 4070 (Ada Lovelace)
-FROM ghcr.io/ublue-os/bazzite-nvidia:stable
+FROM ghcr.io/ublue-os/bazzite-nvidia-open:stable
 
 LABEL org.opencontainers.image.title="dev-station"
 LABEL org.opencontainers.image.description="KDE Plasma game dev workstation — Bazzite NVIDIA"
