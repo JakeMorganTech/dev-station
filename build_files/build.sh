@@ -11,17 +11,20 @@ dnf5 install -y code
 # ── Brave Browser ─────────────────────────────────────────────────────────────
 # Repo is pre-placed at /etc/yum.repos.d/brave-browser.repo via COPY in Containerfile.
 # Native install required — flatpak/snap variants lack hardware security key support.
-# /opt is a symlink in ostree images and the target may not exist at build time,
-# so create the install directory before RPM tries to unpack into it.
-# Resolve the symlink target (e.g. /opt -> /var/opt) and create the real dir.
-mkdir -p "$(readlink -f /opt)/brave.com"
+#
+# /opt is a symlink to /var/opt in ostree images, and /var is a stateful mount
+# that is NOT part of the immutable rootfs — files installed there during build
+# are lost at deploy time. Work around this by:
+#   1. Creating /var/opt/brave.com so RPM can unpack during build
+#   2. Moving the installed files to /usr/lib/opt (part of the immutable rootfs)
+#   3. Using a systemd-tmpfiles rule to symlink /opt/brave.com at boot
+mkdir -p /var/opt/brave.com
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf5 install -y brave-browser
-# Ensure the launcher symlink exists — RPM post-install scripts may fail
-# to create it due to /opt being a symlink in ostree images.
-if [ ! -f /usr/bin/brave-browser-stable ]; then
-    ln -s /opt/brave.com/brave/brave-browser-stable /usr/bin/brave-browser-stable
-fi
+# Relocate to the immutable rootfs
+mv /var/opt/brave.com /usr/lib/opt/brave.com
+# Ensure the launcher is on PATH
+ln -sf /usr/lib/opt/brave.com/brave/brave-browser /usr/bin/brave-browser-stable
 
 # ── Development tools ─────────────────────────────────────────────────────────
 # UE5 build system dependencies not present in the Bazzite base image.
