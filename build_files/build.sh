@@ -11,6 +11,9 @@ dnf5 install -y code
 # ── Brave Browser ─────────────────────────────────────────────────────────────
 # Repo is pre-placed at /etc/yum.repos.d/brave-browser.repo via COPY in Containerfile.
 # Native install required — flatpak/snap variants lack hardware security key support.
+# /opt is a symlink in ostree images and the target may not exist at build time,
+# so create the install directory before RPM tries to unpack into it.
+mkdir -p /opt/brave.com
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf5 install -y brave-browser
 
