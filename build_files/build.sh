@@ -13,7 +13,8 @@ dnf5 install -y code
 # Native install required — flatpak/snap variants lack hardware security key support.
 # /opt is a symlink in ostree images and the target may not exist at build time,
 # so create the install directory before RPM tries to unpack into it.
-mkdir -p /opt/brave.com
+# Resolve the symlink target (e.g. /opt -> /var/opt) and create the real dir.
+mkdir -p "$(readlink -f /opt)/brave.com"
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 dnf5 install -y brave-browser
 
