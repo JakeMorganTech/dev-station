@@ -2,12 +2,13 @@
 FROM scratch AS ctx
 COPY build_files /
 
-# Base image: Fedora Kinoite (KDE Plasma) with NVIDIA open kernel module
+# Base image: Bazzite desktop variant with NVIDIA open kernel module
+# bazzite-nvidia ships Steam, gamemode, mangohud, and proper NVIDIA driver setup out of the box.
 # Requires Turing (RTX 20xx) or newer GPU — confirmed RTX 4070 (Ada Lovelace)
-FROM ghcr.io/ublue-os/kinoite-nvidia-open:stable
+FROM ghcr.io/ublue-os/bazzite-nvidia:stable
 
 LABEL org.opencontainers.image.title="dev-station"
-LABEL org.opencontainers.image.description="KDE Plasma game dev workstation — Kinoite + NVIDIA open"
+LABEL org.opencontainers.image.description="KDE Plasma game dev workstation — Bazzite NVIDIA"
 
 # Overlay repo and config files onto the rootfs before running build.sh
 # This ensures third-party repos (e.g. VS Code) are present when dnf5 runs

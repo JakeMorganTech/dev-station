@@ -9,7 +9,7 @@ rpm --import https://packages.microsoft.com/keys/microsoft.asc
 dnf5 install -y code
 
 # ── Development tools ─────────────────────────────────────────────────────────
-# UE5 build system dependencies not present in the Kinoite base image.
+# UE5 build system dependencies not present in the Bazzite base image.
 # The engine ships its own clang toolchain but clang/lld on the host are also
 # useful for non-UE C++ work. SDL2 is required by the UE5 editor at runtime.
 dnf5 install -y \
@@ -42,11 +42,4 @@ dnf5 install -y \
     cascadia-code-nf-fonts \
     cascadia-mono-nf-fonts
 
-# ── Gaming ────────────────────────────────────────────────────────────────────
-# steam: native install via RPM Fusion (already enabled on ublue base images)
-# gamemode: CPU/GPU governor switching triggered by games
-# mangohud: in-game performance overlay
-dnf5 install -y \
-    steam \
-    gamemode \
-    mangohud
+# NOTE: Steam, gamemode, and mangohud are already included in the bazzite-nvidia base image.
