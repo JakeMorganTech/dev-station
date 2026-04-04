@@ -9,22 +9,14 @@ rpm --import https://packages.microsoft.com/keys/microsoft.asc
 dnf5 install -y code
 
 # ── Brave Browser ─────────────────────────────────────────────────────────────
-# Repo is pre-placed at /etc/yum.repos.d/brave-browser.repo via COPY in Containerfile.
-# Native install required — flatpak/snap variants lack hardware security key support.
-#
-# /opt is a symlink to /var/opt in ostree images, and /var is a stateful mount
-# that is NOT part of the immutable rootfs — files installed there during build
-# are lost at deploy time. Work around this by:
-#   1. Creating /var/opt/brave.com so RPM can unpack during build
-#   2. Moving the installed files to /usr/lib/opt (part of the immutable rootfs)
-#   3. Using a systemd-tmpfiles rule to symlink /opt/brave.com at boot
-mkdir -p /var/opt/brave.com
+# Fetch Brave's official repo definition at build time so we always track their
+# latest repo layout. Temporary native install for security (flatpak chromium
+# sandboxing issues) — remove this and use the flatpak when that improves.
+# rpm-ostree handles /opt relocation to /usr/lib/opt automatically via cliwrap.
+curl -fsSLo /etc/yum.repos.d/brave-browser.repo \
+    https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-dnf5 install -y brave-browser
-# Relocate to the immutable rootfs
-mv /var/opt/brave.com /usr/lib/opt/brave.com
-# Ensure the launcher is on PATH
-ln -sf /usr/lib/opt/brave.com/brave/brave-browser /usr/bin/brave-browser-stable
+rpm-ostree install brave-browser
 
 # ── Development tools ─────────────────────────────────────────────────────────
 # UE5 build system dependencies not present in the Bazzite base image.
