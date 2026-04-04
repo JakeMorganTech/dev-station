@@ -12,11 +12,20 @@ dnf5 install -y code
 # Fetch Brave's official repo definition at build time so we always track their
 # latest repo layout. Temporary native install for security (flatpak chromium
 # sandboxing issues) — remove this and use the flatpak when that improves.
-# rpm-ostree handles /opt relocation to /usr/lib/opt automatically via cliwrap.
+#
+# Brave installs to /opt/brave.com, but /opt is a symlink to /var/opt in ostree
+# images and /var is not part of the immutable rootfs. Neither dnf5 nor
+# rpm-ostree can create directories through the broken symlink during a
+# container build. Fix: point /opt at /usr/lib/opt so the files land in the
+# immutable rootfs. This is the same relocation rpm-ostree cliwrap does on a
+# booted system — we just do it manually since cliwrap isn't active at build time.
+mkdir -p /usr/lib/opt
+rm -f /opt
+ln -sf /usr/lib/opt /opt
 curl -fsSLo /etc/yum.repos.d/brave-browser.repo \
     https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-rpm-ostree install brave-browser
+dnf5 install -y brave-browser
 
 # ── Development tools ─────────────────────────────────────────────────────────
 # UE5 build system dependencies not present in the Bazzite base image.
