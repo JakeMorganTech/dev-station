@@ -1,24 +1,6 @@
 # dev-station first-boot recipes
 # Run any of these with: ujust <recipe-name>
 
-# Install Homebrew into /home/linuxbrew/.linuxbrew
-[group('dev-station')]
-install-brew:
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install all Flatpaks from the baked-in app list
-[group('dev-station')]
-install-flatpaks:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    FLATPAK_LIST="/etc/dev-station/flatpak-apps.txt"
-    echo "Installing Flatpaks from ${FLATPAK_LIST}..."
-    while IFS= read -r app; do
-        [[ -z "$app" || "$app" == \#* ]] && continue
-        flatpak install -y flathub "$app" || echo "WARNING: failed to install $app, skipping"
-    done < "$FLATPAK_LIST"
-    echo "Done."
-
 # Clone dotfiles repo and stow all packages
 [group('dev-station')]
 setup-dotfiles:

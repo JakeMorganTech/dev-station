@@ -1,0 +1,227 @@
+# dev-station pre-installed Flatpak applications
+# Synced by flatpak-preinstall.service or `flatpak preinstall -y`
+# If a user manually uninstalls an app, it won't be forced back.
+
+# ── Communication ─────────────────────────────────────────────────────────────
+[Flatpak Preinstall com.discordapp.Discord]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.mozilla.Thunderbird]
+Branch=stable
+IsRuntime=false
+
+# ── Creative ──────────────────────────────────────────────────────────────────
+[Flatpak Preinstall org.blender.Blender]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.gimp.GIMP]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.inkscape.Inkscape]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.kde.kdenlive]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.kde.krita]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.audacityteam.Audacity]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.obsproject.Studio]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall fr.handbrake.ghb]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.pixieditor.PixiEditor]
+Branch=stable
+IsRuntime=false
+
+# ── Game Dev ──────────────────────────────────────────────────────────────────
+[Flatpak Preinstall org.godotengine.Godot]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.achetagames.epic_asset_manager]
+Branch=stable
+IsRuntime=false
+
+# ── Gaming / Launchers ────────────────────────────────────────────────────────
+[Flatpak Preinstall com.heroicgameslauncher.hgl]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.itch.itch]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.lutris.Lutris]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall app.twintaillauncher.ttl]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.Faugus.faugus-launcher]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.vysp3r.ProtonPlus]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.davidotek.pupgui2]
+Branch=stable
+IsRuntime=false
+
+# ── Emulators ─────────────────────────────────────────────────────────────────
+[Flatpak Preinstall org.prismlauncher.PrismLauncher]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.DolphinEmu.dolphin-emu]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall info.cemu.Cemu]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.shadps4.shadPS4]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.rpcs3.RPCS3]
+Branch=stable
+IsRuntime=false
+
+# ── Productivity ──────────────────────────────────────────────────────────────
+[Flatpak Preinstall md.obsidian.Obsidian]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.gnome.gitlab.somas.Apostrophe]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.super_productivity.SuperProductivity]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.onlyoffice.desktopeditors]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.libreoffice.LibreOffice]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.kde.okular]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.ankiweb.Anki]
+Branch=stable
+IsRuntime=false
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+[Flatpak Preinstall com.github.tchx84.Flatseal]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall it.mijorus.gearlever]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.shiftey.Desktop]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.localsend.localsend_app]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.gnome.World.PikaBackup]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.bitwarden.desktop]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.ranfdev.DistroShelf]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.kde.kclock]
+Branch=stable
+IsRuntime=false
+
+# ── System / Hardware ─────────────────────────────────────────────────────────
+[Flatpak Preinstall io.github.thetumultuousunicornofdarkness.cpu-x]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.geeks3d.furmark]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.jonmagon.kdiskmark]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.usebottles.bottles]
+Branch=stable
+IsRuntime=false
+
+# ── Media ─────────────────────────────────────────────────────────────────────
+[Flatpak Preinstall org.videolan.VLC]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.spotify.Client]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall rocks.shy.VacuumTube]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.rafaelmardojai.Blanket]
+Branch=stable
+IsRuntime=false
+
+# ── Security ──────────────────────────────────────────────────────────────────
+[Flatpak Preinstall com.protonvpn.www]
+Branch=stable
+IsRuntime=false
+
+# ── AI ────────────────────────────────────────────────────────────────────────
+[Flatpak Preinstall com.jeffser.Alpaca]
+Branch=stable
+IsRuntime=false
+
+# ── Learning / Fun ────────────────────────────────────────────────────────────
+[Flatpak Preinstall org.gnome.Solanum]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall dev.bragefuglseth.Keypunch]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.shonebinu.Brief]
+Branch=stable
+IsRuntime=false
